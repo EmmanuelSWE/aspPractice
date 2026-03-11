@@ -1,0 +1,22 @@
+//USER REQUESTS
+GET http://localhost:5119/
+###
+GET http://localhost:5119/users
+###
+POST  http://localhost:5119/users
+content-type: application/json
+
+{
+    "Id" : 2,
+    "Name" : "del me",
+    "Email" : "eashimwe@gmail.com",
+    "Password" : "12345"
+}
+###
+DELETE http://localhost:5119/users/2
+###
+GET http://localhost:5119/users/1
+
+
+
+
