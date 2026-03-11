@@ -1,5 +1,5 @@
-namespace testServer.Models.Entities
-{
+namespace testServer.Models.Entities;
+
     public class Users
     {
         public int Id { get; set; }
@@ -7,4 +7,3 @@ namespace testServer.Models.Entities
         public string Email { get; set; }
         public string Password { get; set; }
     }
-}

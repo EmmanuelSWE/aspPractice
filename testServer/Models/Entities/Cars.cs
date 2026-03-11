@@ -1,5 +1,5 @@
-namespace testServer.Models.Entities
-{
+namespace testServer.Models.Entities;
+
     public class Cars
     {
         public int Id { get; set; }
@@ -8,4 +8,3 @@ namespace testServer.Models.Entities
         public int Year { get; set; }
         public int OwnerId { get; set; }
     }
-}

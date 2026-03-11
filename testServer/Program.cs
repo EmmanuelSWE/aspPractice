@@ -9,22 +9,31 @@ List<Users> users = new List<Users>();
 List<Cars> cars = new List<Cars>();
 List <CarImages> images = new List<CarImages>();
 
+
+//middlewares 
+app.Use(async (context, next) =>
+{
+   Console.WriteLine($"[{context.Request.Method} {context.Request.Path} {DateTime.UtcNow}] Started."); 
+   await next(context);
+     Console.WriteLine($"[{context.Request.Method} {context.Request.Path} {DateTime.UtcNow}] Finished.");   
+});
 app.MapGet("/", () => "Hello World!");
 
 //User Requests
-app.MapGet("/users/{id}", (int id) =>
+app.MapGet("/login", (int Id) =>
 {
-   Users targetUser =  users.SingleOrDefault( u => u.Id == id);
+   Users targetUser =  users.SingleOrDefault( u => u.Id == Id);
    return targetUser is null ? Results.NotFound() : Results.Ok(targetUser);
 });
 
 app.MapGet("/users", () => Results.Ok(users));
 
-app.MapPost("/users", (Users user) =>
+app.MapPost("/signin", (Users user) =>
 {
     users.Add(user);
     return Results.Created($"/users/{user.Id}", user);
 });
+
 
 app.MapDelete("/users/{id}", (int id) =>
 {
@@ -74,5 +83,8 @@ app.MapDelete("/images/{id}", (int id) =>
     images.RemoveAll( u => id == u.Id);
     return Results.NoContent();
 });
+
+
+
 
 app.Run();

@@ -3,11 +3,11 @@ GET http://localhost:5119/
 ###
 GET http://localhost:5119/users
 ###
-POST  http://localhost:5119/users
+POST  http://localhost:5119/signin
 content-type: application/json
 
 {
-    "Id" : 2,
+    "Id" : 1,
     "Name" : "del me",
     "Email" : "eashimwe@gmail.com",
     "Password" : "12345"
@@ -15,7 +15,12 @@ content-type: application/json
 ###
 DELETE http://localhost:5119/users/2
 ###
-GET http://localhost:5119/users/1
+GET http://localhost:5119/login
+
+content-type: application/json
+{
+    "Id" : 1
+}
 ###
 //car requests 
 GET http://localhost:5119/cars
@@ -42,8 +47,8 @@ POST  http://localhost:5119/images
 content-type: application/json
 
 {
-    "Id" : 1,
-    "ImageUrl" : "url image",
+    "Id" : 2,
+    "ImageUrl" : "del image",
     "CarId" : "1"
 }
 ###
