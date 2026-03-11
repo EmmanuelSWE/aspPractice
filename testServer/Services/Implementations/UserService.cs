@@ -5,7 +5,7 @@ namespace testServer.Services.Implementations;
 
 public class UserService : IUser
 {   
-    List<Users> users = new List<Users>();
+    List<Users> users = [];
    public static Users? GetUserByID(int Id)
     {
          Users targetUser =  users.SingleOrDefault( u => u.Id == Id);
