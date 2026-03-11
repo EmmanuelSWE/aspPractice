@@ -1,11 +1,12 @@
 using testServer.Models.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
 using System.Runtime.InteropServices;
+using testServer.Services.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 //here is where you configure the api, add services, etc.
 var app = builder.Build();
-List<Users> users = new List<Users>();
+
 List<Cars> cars = new List<Cars>();
 List <CarImages> images = new List<CarImages>();
 
@@ -19,25 +20,27 @@ app.Use(async (context, next) =>
 });
 app.MapGet("/", () => "Hello World!");
 
+//instantiating my services
+UserService userService = new UserService();
 //User Requests
-app.MapGet("/login", (int Id) =>
+app.MapGet("/login/{Id}", (int Id) =>
 {
-   Users targetUser =  users.SingleOrDefault( u => u.Id == Id);
+   Users targetUser =  userService.GetUserByID(Id);
    return targetUser is null ? Results.NotFound() : Results.Ok(targetUser);
 });
 
-app.MapGet("/users", () => Results.Ok(users));
+app.MapGet("/users", () => Results.Ok(userService.GetUsers()));
 
 app.MapPost("/signin", (Users user) =>
 {
-    users.Add(user);
+    userService.AddUser(user);
     return Results.Created($"/users/{user.Id}", user);
 });
 
 
 app.MapDelete("/users/{id}", (int id) =>
 {
-    users.RemoveAll( u => id == u.Id);
+    userService.DeleteUser(id);
     return Results.NoContent();
 });
 
