@@ -44,7 +44,7 @@ app.MapGet("/cars", () => Results.Ok(cars));
 
 app.MapPost("/cars", (Cars car) =>
 {
-    cars.Add(cars);
+    cars.Add(car);
     return Results.Created($"/cars/{car.Id}", car);
 });
 
@@ -57,7 +57,7 @@ app.MapDelete("/cars/{id}", (int id) =>
 //Car Image Requests
 app.MapGet("/images/{id}", (int id) =>
 {
-   Users targetImage =  images.SingleOrDefault( u => u.Id == id);
+   CarImages targetImage =  images.SingleOrDefault( u => u.Id == id);
    return targetImage is null ? Results.NotFound() : Results.Ok(targetImage);
 });
 
@@ -65,8 +65,8 @@ app.MapGet("/images", () => Results.Ok(images));
 
 app.MapPost("/images", (CarImages image) =>
 {
-    images.Add(user);
-    return Results.Created($"/images/{user.Id}", image);
+    images.Add(image);
+    return Results.Created($"/images/{image.Id}", image);
 });
 
 app.MapDelete("/images/{id}", (int id) =>
